@@ -26,7 +26,7 @@ public class Error {
         Error errDef = new Error();
         Error errAct = new Error(true, 0, "Ошибка активна");
         Error errNotNow = new Error(false, 1, "Ошибка не активна");
-        Error errUnknown= new Error(true, 2, "Ошибка неизвестна");
+        Error errUnknown = new Error(true, 2, "Ошибка неизвестна");
         errDef.printInfo();
         errAct.printInfo();
         errNotNow.printInfo();
