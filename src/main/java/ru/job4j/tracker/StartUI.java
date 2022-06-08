@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class StartUI {
@@ -59,6 +57,18 @@ public class StartUI {
                     System.out.print(item);
                 } else {
                     System.out.println("Заявка с введенным id: " + id + " не найдена.");
+                }
+            } else if (select == 5) {
+                System.out.println("=== Find items by name ===");
+                System.out.print("Enter name: ");
+                String name = scanner.nextLine();
+                Item[] items = tracker.findByName(name);
+                if (items.length > 0) {
+                    for (Item item : items) {
+                        System.out.println(item);
+                    }
+                } else {
+                    System.out.println("Заявка с именем : " + name + " не найдена.");
                 }
             } else if (select == 6) {
                 run = false;
