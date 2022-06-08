@@ -15,9 +15,6 @@ public class Matches {
             if (matches <= 3 && matches >= 1 && matches <= count) {
                 turn = !turn;
                 count -= matches;
-                if (count == 0) {
-                    break;
-                }
             } else {
                 System.out.println("Введено неверное количество спичек");
             }
