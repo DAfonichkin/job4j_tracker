@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class StartUI {
 
-    public void init(Tracker tracker, Input input, UserAction[] actions) {
+    public void init(Input input, Tracker tracker, UserAction[] actions) {
         boolean run = true;
         while (run) {
             showMenu(actions);
@@ -33,6 +33,6 @@ public class StartUI {
                 new ExitAction()
         };
 
-        new StartUI().init(tracker, input, actions);
+        new StartUI().init(input, tracker, actions);
     }
 }
