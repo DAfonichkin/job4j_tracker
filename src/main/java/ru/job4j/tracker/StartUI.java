@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 
-import javax.swing.*;
-
 public class StartUI {
     private final Output out;
 
