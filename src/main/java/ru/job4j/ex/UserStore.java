@@ -8,12 +8,12 @@ public class UserStore {
                 return user;
             }
         }
-        throw new UserNotFoundException();
+        throw new UserNotFoundException("User not found");
     }
 
     public static boolean validate(User user) throws UserInvalidException {
         if (!user.isValid() || user.getUsername().length() < 3) {
-            throw new UserInvalidException();
+            throw new UserInvalidException("User not valid or username length less then three");
         }
         return true;
     }
