@@ -29,8 +29,8 @@ public class StartUI {
 
     public static void main(String[] args) {
         Tracker tracker = new Tracker();
-        Input input = new ValidateInput();
         Output output = new ConsoleOutput();
+        Input input = new ValidateInput(new ConsoleInput(), output);
 
         UserAction[] actions = {
                 new CreateAction(output),
@@ -42,6 +42,6 @@ public class StartUI {
                 new ExitAction()
         };
 
-       new StartUI(output).init(input, tracker, actions);
+        new StartUI(output).init(input, tracker, actions);
     }
 }
