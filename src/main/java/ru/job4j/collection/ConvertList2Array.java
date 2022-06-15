@@ -10,10 +10,10 @@ public class ConvertList2Array {
         for (Integer num : list) {
             array[row][cell] = num;
             if (cell < cells - 1) {
-                cell ++;
+                cell++;
             } else {
                 cell = 0;
-                row ++;
+                row++;
             }
             if (row == groups) {
                 break;
