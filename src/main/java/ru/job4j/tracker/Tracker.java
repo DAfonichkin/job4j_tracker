@@ -31,7 +31,7 @@ public class Tracker {
     }
 
     public List<Item> findAll() {
-        return items;
+        return List.copyOf(items);
     }
 
     private int indexOf(int id) {
@@ -50,9 +50,8 @@ public class Tracker {
         boolean rsl = index != -1;
         if (rsl) {
             item.setId(id);
-            items.remove(index);
-            items.add(item);
-        }
+            items.set(index, item);
+         }
         return rsl;
     }
 
