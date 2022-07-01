@@ -22,7 +22,8 @@ public class Order {
     public String toString() {
         return "Order{"
                 + "number='" + number + '\''
-                + ", name='" + name + '\'' + '}';
+                + ", name='" + name + '\''
+                + '}';
     }
 
     @Override
