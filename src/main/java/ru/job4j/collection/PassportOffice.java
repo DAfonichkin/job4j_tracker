@@ -15,7 +15,6 @@ public class PassportOffice {
         return false;
     }
 
-
     public Citizen get(String passport) {
         if (citizens.containsKey(passport)) {
             return citizens.get(passport);
