@@ -28,7 +28,7 @@ public class JobTest {
     }
 
     @Test
-    public void whenAscCompareByPriorityDifferentValues () {
+    public void whenAscCompareByPriorityDifferentValues() {
         Comparator<Job> cmpNamePriority = new JobAscByPriority();
         int rsl = cmpNamePriority.compare(
                 new Job("Fix bug", 1),
@@ -38,7 +38,7 @@ public class JobTest {
     }
 
     @Test
-    public void whenAscCompareByPrioritySimilarValues () {
+    public void whenAscCompareByPrioritySimilarValues() {
         Comparator<Job> cmpNamePriority = new JobAscByPriority();
         int rsl = cmpNamePriority.compare(
                 new Job("Fix bug", 1),
