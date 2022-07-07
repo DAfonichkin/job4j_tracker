@@ -21,24 +21,4 @@ public class LexSortTest {
         Arrays.sort(input, new LexSort());
         assertThat(input, is(out));
     }
-
-    @Test (expected = NumberFormatException.class)
-    public void whenWrongTaskNumber() {
-        String[] input = {
-                "a. Task.",
-                "1. Task.",
-                "2. Task."
-        };
-        Arrays.sort(input, new LexSort());
-    }
-
-    @Test (expected = IllegalArgumentException.class)
-    public void whenWrongSeparator() {
-        String[] input = {
-                "0, Task.",
-                "1, Task.",
-                "2? Task."
-        };
-        Arrays.sort(input, new LexSort());
-    }
 }
