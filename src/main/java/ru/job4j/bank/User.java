@@ -1,8 +1,16 @@
 package ru.job4j.bank;
 
 import java.util.Objects;
-
+/**
+ * Класс описывает модель данных пользователя
+ * @author Dmtri Afonichkin
+ * @version 1.0
+ */
 public class User {
+    /**
+     * Поле passport хранит паспортные данные пользователя, должно быть уникально для каждого пользователя.
+     * Поле username - имя пользователя
+     */
     private String passport;
     private String username;
 
