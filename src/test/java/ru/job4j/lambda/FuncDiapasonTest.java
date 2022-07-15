@@ -2,6 +2,7 @@ package ru.job4j.lambda;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
@@ -29,6 +30,5 @@ public class FuncDiapasonTest {
         List<Double> expected = Arrays.asList(244D, 730D, 2188D);
         assertThat(result, is(expected));
     }
-
 
 }
