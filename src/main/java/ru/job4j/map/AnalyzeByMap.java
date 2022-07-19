@@ -79,7 +79,7 @@ public class AnalyzeByMap {
     }
 
     public static Label bestSubject(List<Pupil> pupils) {
-        Label bestSubject = new Label("", 0);
+        Label bestSubject = null;
         HashMap<String, Integer> scoresBySubj = new HashMap<>();
         double sum;
         for (Pupil pupil : pupils) {
@@ -93,7 +93,7 @@ public class AnalyzeByMap {
         }
         for (String subjName : scoresBySubj.keySet()) {
             sum = scoresBySubj.get(subjName);
-            if (bestSubject.score() < sum) {
+            if (bestSubject == null || bestSubject.score() < sum) {
                 bestSubject = new Label(subjName, sum);
             }
         }
