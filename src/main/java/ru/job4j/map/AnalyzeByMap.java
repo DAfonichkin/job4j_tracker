@@ -2,7 +2,6 @@ package ru.job4j.map;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 public class AnalyzeByMap {
@@ -20,40 +19,33 @@ public class AnalyzeByMap {
     }
 
     public static List<Label> averageScoreBySubject(List<Pupil> pupils) {
-        double sum;
-        double count;
         List<Label> rsl = new ArrayList<>();
-        List<Subject> subjList = new ArrayList<>();
-        HashSet<String> subjNamesList = new HashSet<>();
+        HashMap<String, Integer> scoresBySubj = new HashMap<>();
+        HashMap<String, Integer> countBySubj = new HashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject subj : pupil.subjects()) {
-                subjList.add(subj);
-                subjNamesList.add(subj.name());
-            }
-        }
-        for (String subjName : subjNamesList) {
-            sum = 0;
-            count = 0;
-            for (Subject subj : subjList) {
-                System.out.println(subjName);
-                System.out.println(subj.name());
-                if (subj.name().equals(subjName)) {
-                    sum += subj.score();
-                    count++;
+                if (scoresBySubj.containsKey(subj.name())) {
+                    scoresBySubj.put(subj.name(), scoresBySubj.get(subj.name()) + subj.score());
+                    countBySubj.put(subj.name(), countBySubj.get(subj.name()) + 1);
+                } else {
+                    scoresBySubj.put(subj.name(), subj.score());
+                    countBySubj.put(subj.name(), 1);
                 }
             }
+        }
+        for (String subjName : scoresBySubj.keySet()) {
+            double sum = scoresBySubj.get(subjName);
+            int count = countBySubj.get(subjName);
             rsl.add(new Label(subjName, sum / count));
         }
         return rsl;
     }
 
     public static List<Label> averageScoreByPupil(List<Pupil> pupils) {
-        double sum;
-        double count;
         List<Label> rsl = new ArrayList<>();
         for (Pupil pupil : pupils) {
-            sum = 0;
-            count = 0;
+            double sum = 0;
+            double count = 0;
             for (Subject subj : pupil.subjects()) {
                 sum += subj.score();
                 count++;
@@ -65,9 +57,8 @@ public class AnalyzeByMap {
 
     public static Label bestStudent(List<Pupil> pupils) {
         Label bestStudent = new Label("", 0);
-        double sum;
         for (Pupil pupil : pupils) {
-            sum = 0;
+            double sum = 0;
             for (Subject subj : pupil.subjects()) {
                 sum += subj.score();
             }
@@ -81,7 +72,6 @@ public class AnalyzeByMap {
     public static Label bestSubject(List<Pupil> pupils) {
         Label bestSubject = null;
         HashMap<String, Integer> scoresBySubj = new HashMap<>();
-        double sum;
         for (Pupil pupil : pupils) {
             for (Subject subj : pupil.subjects()) {
                 if (scoresBySubj.containsKey(subj.name())) {
@@ -92,7 +82,7 @@ public class AnalyzeByMap {
             }
         }
         for (String subjName : scoresBySubj.keySet()) {
-            sum = scoresBySubj.get(subjName);
+            double sum = scoresBySubj.get(subjName);
             if (bestSubject == null || bestSubject.score() < sum) {
                 bestSubject = new Label(subjName, sum);
             }
