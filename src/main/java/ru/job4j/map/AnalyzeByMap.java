@@ -2,6 +2,7 @@ package ru.job4j.map;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 public class AnalyzeByMap {
@@ -20,23 +21,18 @@ public class AnalyzeByMap {
 
     public static List<Label> averageScoreBySubject(List<Pupil> pupils) {
         List<Label> rsl = new ArrayList<>();
-        HashMap<String, Integer> scoresBySubj = new HashMap<>();
-        HashMap<String, Integer> countBySubj = new HashMap<>();
+        Map<String, Integer> scoresBySubj = new HashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject subj : pupil.subjects()) {
                 if (scoresBySubj.containsKey(subj.name())) {
                     scoresBySubj.put(subj.name(), scoresBySubj.get(subj.name()) + subj.score());
-                    countBySubj.put(subj.name(), countBySubj.get(subj.name()) + 1);
                 } else {
                     scoresBySubj.put(subj.name(), subj.score());
-                    countBySubj.put(subj.name(), 1);
                 }
             }
         }
         for (String subjName : scoresBySubj.keySet()) {
-            double sum = scoresBySubj.get(subjName);
-            int count = countBySubj.get(subjName);
-            rsl.add(new Label(subjName, sum / count));
+            rsl.add(new Label(subjName, scoresBySubj.get(subjName) / pupils.size()));
         }
         return rsl;
     }
@@ -71,7 +67,7 @@ public class AnalyzeByMap {
 
     public static Label bestSubject(List<Pupil> pupils) {
         Label bestSubject = null;
-        HashMap<String, Integer> scoresBySubj = new HashMap<>();
+        Map<String, Integer> scoresBySubj = new HashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject subj : pupil.subjects()) {
                 if (scoresBySubj.containsKey(subj.name())) {
