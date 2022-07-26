@@ -21,13 +21,13 @@ public class AnalyzeByMap {
 
     public static List<Label> averageScoreBySubject(List<Pupil> pupils) {
         List<Label> rsl = new ArrayList<>();
-        Map<String, Integer> scoresBySubj = new HashMap<>();
+        Map<String, Double> scoresBySubj = new HashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject subj : pupil.subjects()) {
                 if (scoresBySubj.containsKey(subj.name())) {
                     scoresBySubj.put(subj.name(), scoresBySubj.get(subj.name()) + subj.score());
                 } else {
-                    scoresBySubj.put(subj.name(), subj.score());
+                    scoresBySubj.put(subj.name(), (double) subj.score());
                 }
             }
         }
