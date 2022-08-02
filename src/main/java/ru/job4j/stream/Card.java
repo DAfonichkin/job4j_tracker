@@ -12,11 +12,11 @@ public class Card {
     }
 
     public static void main(String[] args) {
-        Suit[] suits = {Suit.Diamonds, Suit.Hearts, Suit.Spades, Suit.Clubs};
-        Value[] values = {Value.V_6, Value.V_7, Value.V_8};
+        Suit[] suits = Suit.values();
+        Value[] values = Value.values();
         Stream.of(suits)
                 .flatMap(elSuit -> Stream.of(values)
-                        .map(elValue -> elSuit + " " + elValue))
+                        .map(elValue -> new Card(elSuit, elValue)))
                 .forEach(System.out::println);
     }
 }
