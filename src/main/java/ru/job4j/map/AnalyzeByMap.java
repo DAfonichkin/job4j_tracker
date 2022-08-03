@@ -12,7 +12,7 @@ public class AnalyzeByMap {
         double count = 0;
         for (Pupil pupil : pupils) {
             for (Subject subj : pupil.subjects()) {
-                sum += subj.score();
+                sum += subj.getScore();
                 count++;
             }
         }
@@ -24,10 +24,10 @@ public class AnalyzeByMap {
         Map<String, Double> scoresBySubj = new HashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject subj : pupil.subjects()) {
-                if (scoresBySubj.containsKey(subj.name())) {
-                    scoresBySubj.put(subj.name(), scoresBySubj.get(subj.name()) + subj.score());
+                if (scoresBySubj.containsKey(subj.getName())) {
+                    scoresBySubj.put(subj.getName(), scoresBySubj.get(subj.getName()) + subj.getScore());
                 } else {
-                    scoresBySubj.put(subj.name(), (double) subj.score());
+                    scoresBySubj.put(subj.getName(), (double) subj.getScore());
                 }
             }
         }
@@ -43,7 +43,7 @@ public class AnalyzeByMap {
             double sum = 0;
             double count = 0;
             for (Subject subj : pupil.subjects()) {
-                sum += subj.score();
+                sum += subj.getScore();
                 count++;
             }
             rsl.add(new Label(pupil.name(), sum / count));
@@ -56,7 +56,7 @@ public class AnalyzeByMap {
         for (Pupil pupil : pupils) {
             double sum = 0;
             for (Subject subj : pupil.subjects()) {
-                sum += subj.score();
+                sum += subj.getScore();
             }
             if (bestStudent.score() < sum) {
                 bestStudent = new Label(pupil.name(), sum);
@@ -70,10 +70,10 @@ public class AnalyzeByMap {
         Map<String, Integer> scoresBySubj = new HashMap<>();
         for (Pupil pupil : pupils) {
             for (Subject subj : pupil.subjects()) {
-                if (scoresBySubj.containsKey(subj.name())) {
-                    scoresBySubj.put(subj.name(), scoresBySubj.get(subj.name()) + subj.score());
+                if (scoresBySubj.containsKey(subj.getName())) {
+                    scoresBySubj.put(subj.getName(), scoresBySubj.get(subj.getName()) + subj.getScore());
                 } else {
-                    scoresBySubj.put(subj.name(), subj.score());
+                    scoresBySubj.put(subj.getName(), subj.getScore());
                 }
             }
         }
