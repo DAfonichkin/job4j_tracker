@@ -42,7 +42,7 @@ public class Analyze {
                                 .flatMap(p -> p.subjects().stream())
                                 .mapToInt(Subject::score)
                                 .sum()))
-                .max((o1, o2) -> o1.score() == o2.score() ? 0 : o1.score() > o2.score() ? 1 : 0)
+                .max(Comparator.comparingDouble(Tuple::score))
                 .orElse(null);
     }
 
@@ -50,14 +50,11 @@ public class Analyze {
         return stream
                 .flatMap(p -> p.subjects().stream())
                 .collect(Collectors
-                        .groupingBy(Subject::name,
-                                LinkedHashMap::new,
-                                Collectors
-                                        .summingDouble(Subject::score)))
+                        .groupingBy(Subject::name, Collectors.summingDouble(Subject::score)))
                 .entrySet()
                 .stream()
                 .map(s -> new Tuple(s.getKey(), s.getValue()))
-                .max((o1, o2) -> o1.score() == o2.score() ? 0 : o1.score() > o2.score() ? 1 : 0)
+                .max(Comparator.comparingDouble(Tuple::score))
                 .orElse(null);
     }
 }
