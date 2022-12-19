@@ -2,7 +2,6 @@ package ru.job4j.tracker;
 
 import java.sql.*;
 import java.io.InputStream;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -35,6 +34,13 @@ public class SqlTracker implements Store {
         }
     }
 
+    private Item convertResultToItem(ResultSet rsl)  throws SQLException {
+        return new Item(
+                rsl.getInt("id"),
+                rsl.getString("name"),
+                rsl.getTimestamp("created").toLocalDateTime());
+    }
+
     @Override
     public void close() throws SQLException {
         if (cn != null) {
@@ -48,8 +54,7 @@ public class SqlTracker implements Store {
                      cn.prepareStatement("insert into items (name, created) values (?, ?)",
                             Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, item.getName());
-            long millis = System.currentTimeMillis();
-            Timestamp timestamp = new Timestamp(millis);
+            Timestamp timestamp = Timestamp.valueOf(item.getCreated());
             statement.setTimestamp(2, timestamp);
             statement.execute();
             try (ResultSet generatedKey = statement.getGeneratedKeys()) {
@@ -98,13 +103,7 @@ public class SqlTracker implements Store {
                      cn.prepareStatement("select * from items")) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    Timestamp timestamp = resultSet.getTimestamp("created");
-                    LocalDateTime created = timestamp.toLocalDateTime();
-                    rsl.add(new Item(
-                            resultSet.getInt("id"),
-                            resultSet.getString("name"),
-                            created
-                            ));
+                    rsl.add(convertResultToItem(resultSet));
                 }
             }
         } catch (Exception e) {
@@ -121,13 +120,7 @@ public class SqlTracker implements Store {
             statement.setString(1, key);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    Timestamp timestamp = resultSet.getTimestamp("created");
-                    LocalDateTime created = timestamp.toLocalDateTime();
-                    rsl.add(new Item(
-                            resultSet.getInt("id"),
-                            resultSet.getString("name"),
-                            created
-                    ));
+                   rsl.add(convertResultToItem(resultSet));
                 }
             }
         } catch (Exception e) {
@@ -143,14 +136,8 @@ public class SqlTracker implements Store {
                      cn.prepareStatement("select * from items where id=?")) {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    Timestamp timestamp = resultSet.getTimestamp("created");
-                    LocalDateTime created = timestamp.toLocalDateTime();
-                    rsl = new Item(
-                            resultSet.getInt("id"),
-                            resultSet.getString("name"),
-                            created
-                    );
+                if (resultSet.next()) {
+                    rsl = convertResultToItem(resultSet);
                 }
             }
         } catch (Exception e) {
