@@ -89,7 +89,7 @@ public class SqlTrackerTest {
         item1.setId(id1);
         int id2 = tracker.add(item2).getId();
         item2.setId(id2);
-        List<Item> expected = List.of(item1,item2);
+        List<Item> expected = List.of(item1, item2);
         assertThat(tracker.findAll()).isEqualTo(expected);
     }
 
