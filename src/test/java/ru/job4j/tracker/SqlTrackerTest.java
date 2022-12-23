@@ -63,10 +63,8 @@ public class SqlTrackerTest {
     @Test
     void whenReplaceAndFindByNewIdIsReplaced() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item1 = new Item("item1");
-        Item item2 = new Item("item2");
-        int id = tracker.add(item1).getId();
-        item2.setId(id);
+        int id = tracker.add(new Item("item1")).getId();
+        Item item2 = new Item(id,"item2");
         tracker.replace(id, item2);
         assertThat(tracker.findById(id)).isEqualTo(item2);
     }
@@ -74,8 +72,7 @@ public class SqlTrackerTest {
     @Test
     void whenDeleteThenFindByIdIsNull() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("item");
-        int id = tracker.add(item).getId();
+        int id = tracker.add(new Item("item")).getId();
         tracker.delete(id);
         assertThat(tracker.findById(id)).isNull();
     }
@@ -83,12 +80,8 @@ public class SqlTrackerTest {
     @Test
     void whenFindAllThenGetAllItems() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item1 = new Item("item1");
-        Item item2 = new Item("item2");
-        int id1 = tracker.add(item1).getId();
-        item1.setId(id1);
-        int id2 = tracker.add(item2).getId();
-        item2.setId(id2);
+        Item item1 = tracker.add(new Item("item1"));
+        Item item2 = tracker.add(new Item("item2"));
         List<Item> expected = List.of(item1, item2);
         assertThat(tracker.findAll()).isEqualTo(expected);
     }
@@ -96,18 +89,14 @@ public class SqlTrackerTest {
     @Test
     void whenFindByNameThenGetItem() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("item");
-        int id = tracker.add(item).getId();
-        item.setId(id);
+        Item item = tracker.add(new Item("item"));
         assertThat(tracker.findByName(item.getName())).isEqualTo(List.of(item));
     }
 
     @Test
     void whenFindByIdThenGetItem() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("item");
-        int id = tracker.add(item).getId();
-        item.setId(id);
+        Item item = tracker.add(new Item("item"));
         assertThat(tracker.findById(item.getId())).isEqualTo(item);
     }
 }
