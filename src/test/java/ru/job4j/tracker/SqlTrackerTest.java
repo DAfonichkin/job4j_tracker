@@ -64,7 +64,7 @@ public class SqlTrackerTest {
     void whenReplaceAndFindByNewIdIsReplaced() {
         SqlTracker tracker = new SqlTracker(connection);
         int id = tracker.add(new Item("item1")).getId();
-        Item item2 = new Item(id,"item2");
+        Item item2 = new Item(id, "item2");
         tracker.replace(id, item2);
         assertThat(tracker.findById(id)).isEqualTo(item2);
     }
