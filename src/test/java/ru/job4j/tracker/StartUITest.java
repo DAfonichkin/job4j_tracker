@@ -199,7 +199,7 @@ public class StartUITest {
     }
 
     @Test
-    public void WhenReplace() {
+    public void whenReplace() {
         Output out = new StubOutput();
         Store tracker = new MemTracker();
         tracker.add(new Item("Replaced item"));
@@ -219,7 +219,7 @@ public class StartUITest {
     }
 
     @Test
-    public void WhenDelete() {
+    public void whenDelete() {
         Output out = new StubOutput();
         Store tracker = new MemTracker();
         tracker.add(new Item("Deleted item"));
@@ -237,11 +237,11 @@ public class StartUITest {
     }
 
     @Test
-    public void WhenFindById() {
+    public void whenFindById() {
         Output out = new StubOutput();
         Store tracker = new MemTracker();
-        Item item1 = new Item(1,"First item");
-        Item item2 = new Item(2,"Second item");
+        Item item1 = new Item(1, "First item");
+        Item item2 = new Item(2, "Second item");
         tracker.add(item1);
         tracker.add(item2);
         FindByIdAction find = new FindByIdAction(out);
@@ -257,11 +257,11 @@ public class StartUITest {
     }
 
     @Test
-    public void WhenFindByName() {
+    public void whenFindByName() {
         Output out = new StubOutput();
         Store tracker = new MemTracker();
-        Item item1 = new Item(1,"First item");
-        Item item2 = new Item(2,"Second item");
+        Item item1 = new Item(1, "First item");
+        Item item2 = new Item(2, "Second item");
         tracker.add(item1);
         tracker.add(item2);
         FindByNameAction find = new FindByNameAction(out);
