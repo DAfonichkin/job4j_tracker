@@ -72,9 +72,9 @@ public class HbmTracker implements Store, AutoCloseable {
     @Override
     public List<Item> findAll() {
         Session session = sf.openSession();
-        session.beginTransaction();
         List<Item> rsl = new ArrayList<>();
         try {
+            session.beginTransaction();
             rsl = session.createQuery("from ru.job4j.tracker.Item", Item.class).list();
             session.getTransaction().commit();
         } catch (Exception e) {
